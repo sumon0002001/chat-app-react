@@ -22,8 +22,8 @@ const ChatFeed = (props) => {
                     <div className = "message-block">
                         {
                             isMyMessage
-                            ? <MyMessage />
-                            : < TheirMessage />
+                            ? <MyMessage message = {message} />
+                            : < TheirMessage message = {message} lastMessage = {messages[lastMessageKey]}/>
                         }
                     </div>
                     <div className= "read-receipts" style= {{marginRight: isMyMessage ? '180px' : '0px', marginLeft: isMyMessage ? '0px' : '68px' }}>
@@ -36,7 +36,7 @@ const ChatFeed = (props) => {
 
     
 
-    (!chat) return 'Loading.........';
+    if (!chat) return 'Loading.........';
 
     return (
         <div className="chat-feed">
@@ -48,6 +48,11 @@ const ChatFeed = (props) => {
 
             </div>
             {renderMessages()};
+            <div style={{ height: '100px'}}></div>
+            <div className= "message-form-container">
+                <MessageForm {...props} chatId = {activeChat} />
+
+            </div>
            
         </div>
     )
